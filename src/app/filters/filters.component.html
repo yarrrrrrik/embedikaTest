@@ -1,1 +1,23 @@
-<p>filters works!</p>
+<div class="filters">
+  <!-- on keydown.enter -->
+  <h3>Filters</h3>
+  <input type="text" name="" value="title" [(ngModel)]="query.searchQueryString" (keydown.enter)="get()">
+  <div class="checkbox-group">
+    <ul>
+      <li><input type="checkbox" [(ngModel)]="query.languagesChecked.python">Python</li>
+      <li><input type="checkbox" [(ngModel)]="query.languagesChecked.javascript">javascript</li>
+      <li><input type="checkbox" [(ngModel)]="query.languagesChecked.java">java</li>
+      <li><input type="checkbox" [(ngModel)]="query.languagesChecked.php">php</li>
+      <li><input type="checkbox" [(ngModel)]="query.languagesChecked.assembly">assembly</li>
+    </ul>
+  <div class="radio-group">
+    <ul>
+      <p>isMirror?</p>
+      <li><input type="radio" name="pupik" [(ngModel)]="query.isMirror" value="true">yes</li>
+      <li><input type="radio" name="pupik" [(ngModel)]="query.isMirror" value="false">No</li>
+    </ul>
+  </div>
+  <button type="button" name="button" (click)="get()">get</button>
+  <button type="button" name="button" (click)="show()">show</button>
+  <button type="button" name="button" (click)="init()">init</button>
+</div>

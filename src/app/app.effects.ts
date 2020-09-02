@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core'
 import {Actions,createEffect,ofType} from '@ngrx/effects'
-import {listActionsType,ListGetReposAction,ListPushReposAction} from './ngrx/list/list.actions'
+import {listActionsType,ListGetReposInitAction,ListPushReposAction} from './ngrx/list/list.actions'
 import {map,mergeMap,switchMap} from 'rxjs/operators'
 import {ListService} from './services/list.service'
 
@@ -15,8 +15,11 @@ export class AppEffects {
   ) {}
 
   loadRepos$ = createEffect(() => this.actions$.pipe(
-    ofType(listActionsType.getRepos),
-    switchMap(() => this.listService.getRepos()
+    ofType(
+      listActionsType.getRepos,
+      listActionsType.getReposInit,
+    ),
+    switchMap((action) => this.listService.getRepos(action)
     .pipe(
       map(repos => {
         class Repo{
