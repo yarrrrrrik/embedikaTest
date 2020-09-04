@@ -1,6 +1,6 @@
 <div class="list">
-  <button>Repos</button>
-  <!-- <button (click)="getRepos1">Repos</button> -->
+  <!-- <button>Repos</button> -->
+  <button (click)="getRepos1()">Repos</button>
 
   <h2 class="list__title">SpaceX Ships</h2>
   <app-list-item *ngFor="let repo of repos" [repo]="repo"></app-list-item>

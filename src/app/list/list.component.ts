@@ -4,7 +4,7 @@ import {Observable} from 'rxjs'
 import {select,Store} from '@ngrx/store'
 import {listNode,ListState,listReducer} from '../ngrx/list/list.reducer'
 import {ListGetReposInitAction} from '../ngrx/list/list.actions'
-import {selectRepos} from '../ngrx/list/list.selectors'
+import {selectRepos, selectCurrentPage} from '../ngrx/list/list.selectors'
 
 @Component({
   selector: 'app-list',
@@ -13,8 +13,21 @@ import {selectRepos} from '../ngrx/list/list.selectors'
 })
 export class ListComponent implements OnInit {
 
+  public currentPage:number
+  public selectCurrentPage$ = this.store$.pipe(select(selectCurrentPage)).subscribe(number => {
+    this.currentPage = number - 1
+    this.store$.pipe(select(selectRepos)).subscribe(repos => {
+      this.repos = repos[this.currentPage]
+    })
+
+  })
+
   public repos:any = []
-  public selector$ = this.store$.pipe(select(selectRepos)).subscribe(repos => {this.repos = repos})
+  public selectRepos$ = this.store$.pipe(select(selectRepos)).subscribe(repos => {
+    this.repos = repos[this.currentPage]
+  })
+
+
 
   constructor(
     public listService: ListService,
@@ -27,6 +40,5 @@ export class ListComponent implements OnInit {
   }
 
   getRepos1(){
-    console.log(this.repos)
   }
 }

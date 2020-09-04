@@ -3,8 +3,12 @@ import {Action} from '@ngrx/store'
 export enum listActionsType{
   getReposInit ='[LIST] getReposInit',
   getRepos ='[LIST] getRepos',
+  getReposCurrentPage ='[LIST] getReposCurrentPage',
+  pushReposCurrentPage = '[LIST] pushReposCurrentPage',
   pushRepos = '[LIST] pushRepos',
-  saveLastQuery = '[LIST] saveLastQuery'
+  saveLastQuery = '[LIST] saveLastQuery',
+  showPreviousPage = '[LIST] showPreviousPage',
+  showNextPage = '[LIST] showNextPage'
 }
 
 export class ListGetReposInitAction implements Action{
@@ -22,9 +26,36 @@ export class ListPushReposAction implements Action{
   constructor(public repos){}
 }
 
-export class SaveLastQuery implements Action{
+export class ListGetReposCurrentPageAction implements Action{
+  readonly type = listActionsType.getReposCurrentPage
+  constructor(
+    public query,
+    public currentPage
+  ){}
+}
+
+export class ListShowPreviousPage {
+  readonly type = listActionsType.showPreviousPage
+}
+
+export class ListShowNextPage {
+  readonly type = listActionsType.showNextPage
+}
+
+export class ListPushReposCurrentPageAction implements Action{
+  readonly type = listActionsType.pushReposCurrentPage
+  constructor(public repos){}
+}
+
+export class SaveLastQueryAction implements Action{
   readonly type = listActionsType.saveLastQuery
   constructor(public lastQuery){}
 }
 
-export type ListActions = ListGetReposInitAction | ListGetReposAction | ListPushReposAction | SaveLastQuery
+export type ListActions = ListGetReposInitAction
+                        | ListGetReposAction
+                        | ListPushReposAction
+                        | SaveLastQueryAction
+                        | ListPushReposCurrentPageAction 
+                        | ListShowPreviousPage
+                        | ListShowNextPage

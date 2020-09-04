@@ -1,6 +1,6 @@
 <div class="pagination">
-  <button type="button" name="button"><=</button>
-  <p>1</p>
-  <button type="button" name="button">=></button>
+  <button type="button" name="button" (click)="showPreviousPage()"><=</button>
+  <p>{{currentPage - 1}}</p>
+  <button type="button" name="button" (click)="showNextPage()">=></button>
 
 </div>
