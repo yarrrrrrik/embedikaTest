@@ -36,7 +36,9 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store$.dispatch(new ListGetReposInitAction());
+    if(!this.repos){
+      this.store$.dispatch(new ListGetReposInitAction());
+    }
   }
 
   getRepos1(){
