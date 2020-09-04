@@ -1,1 +1,11 @@
-<p>item-card works!</p>
+<div class="card-item">
+  <button type="button" name="button" routerLink="" (click)="closeCard()">back</button>
+  <p>Name:{{repoDetails.name}}</p>
+  <p>Private:{{repoDetails.isPrivate}}</p>
+  <p>Watchers:{{repoDetails.watchers_count}}</p>
+  <p>Forks:{{repoDetails.forks_count}}</p>
+  <p>Open issues:{{repoDetails.open_issues_count}}</p>
+  <p>Default branch:{{repoDetails.default_branch}}</p>
+  <p>Subscribers:{{repoDetails.subscribers_count}}</p>
+  <a href="repoDetails.html_url">link</a>
+</div>

@@ -18,7 +18,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { metaReducers,reducers } from './ngrx';
 import { AppEffects } from './app.effects';
 import { ReactiveFormsModule } from '@angular/forms';
+import {Routes, RouterModule} from '@angular/router';
 
+const appRoutes: Routes =[
+    { path: '', component: ListComponent},
+    { path: 'itemCard', component: ItemCardComponent }
+];
 
 @NgModule({
   declarations: [
@@ -44,7 +49,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([AppEffects]),
-    StoreRouterConnectingModule.forRoot()
+    StoreRouterConnectingModule.forRoot(),
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]
