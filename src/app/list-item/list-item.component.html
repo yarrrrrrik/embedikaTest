@@ -1,15 +1,25 @@
 <div class="list-item">
-  <span class="page-list-item__title">{{repo.name}} -></span>
+  <div class="list-item__title">
+    <p>{{repo.name}}</p>
+    <svg (click)="showCard()" routerLink="/itemCard" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M0 9L12.17 9L6.58 14.59L8 16L16 8L8 0L6.59 1.41L12.17 7L0 7L0 9Z" fill="#2962FF"/>
+    </svg>
+  </div>
   <div class="list-item__types">
     <div class="item__type">
       <p>Size</p>
-      <a href="#">{{repo.size}}</a>
+      <span href="#">{{repo.size}}</span>
     </div>
     <div class="item__type">
       <p>Stars</p>
-      <a href="#">{{repo.stargazers_count}}</a>
+      <span href="#">{{repo.stargazers_count}}</span>
     </div>
-    <button type="button" name="button" (click)="showCard()" routerLink="/itemCard">show card</button>
+    <div class="item__type">
+      <p>Language</p>
+      <span href="#" *ngIf="repo.language">{{repo.language}}</span>
+      <span href="#" *ngIf="!repo.language">None</span>
+
+    </div>
   </div>
 
 </div>

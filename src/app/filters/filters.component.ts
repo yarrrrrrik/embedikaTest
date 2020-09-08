@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {select,Store} from '@ngrx/store'
-import {ListGetReposAction,ListGetReposInitAction} from '../ngrx/list/list.actions'
-import {listNode,ListState,listReducer} from '../ngrx/list/list.reducer'
+import { select, Store } from '@ngrx/store'
+import { ListGetReposAction, ListGetReposInitAction } from '../ngrx/list/list.actions'
+import { ListState } from '../ngrx/list/list.reducer'
 
 @Component({
   selector: 'app-filters',
@@ -17,6 +17,7 @@ export class FiltersComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
   query:any = {
     searchQueryString:'',
     languagesChecked:{
@@ -29,16 +30,41 @@ export class FiltersComponent implements OnInit {
     isMirror:false
   }
 
-  get(){
+  isHidden:boolean = true
+
+  languagesInputValue:any = ''
+
+  show(){
+    console.log('yes');
+  }
+
+  setLanguagesInputValue(){
+    let countLanguages:number = 0
+
+      for (let language in this.query.languagesChecked){
+        this.query.languagesChecked[language] ? countLanguages++ : ''
+      }
+
+      if(countLanguages === 0){
+        this.languagesInputValue = ''
+      }
+      if(countLanguages === 1){
+        this.languagesInputValue = 'Выбран 1 язык'
+      }
+      if(countLanguages >= 2 && countLanguages <= 4){
+        this.languagesInputValue = `Выбрано ${countLanguages} языка`
+      }
+      if(countLanguages === 5){
+        this.languagesInputValue = 'Выбрано 5 языков'
+      }
+  }
+  toggleHide(){
+    this.isHidden = !this.isHidden
+  }
+
+  getRepos(){
     let query = this.query
     this.store$.dispatch(new ListGetReposAction(query));
   }
-  show(){
-    console.log(this.query)
-  }
-  init(){
-    this.store$.dispatch(new ListGetReposInitAction())
-  }
-
 
 }

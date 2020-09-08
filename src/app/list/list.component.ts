@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {ListService} from '../services/list.service'
-import {Observable} from 'rxjs'
-import {select,Store} from '@ngrx/store'
-import {listNode,ListState,listReducer} from '../ngrx/list/list.reducer'
-import {ListGetReposInitAction} from '../ngrx/list/list.actions'
-import {selectRepos, selectCurrentPage} from '../ngrx/list/list.selectors'
+import { ListService } from '../services/list.service'
+import { Observable } from 'rxjs'
+import { select, Store } from '@ngrx/store'
+import { ListState } from '../ngrx/list/list.reducer'
+import { ListGetReposInitAction } from '../ngrx/list/list.actions'
+import { selectRepos, selectCurrentPage } from '../ngrx/list/list.selectors'
 
 @Component({
   selector: 'app-list',
@@ -27,8 +27,6 @@ export class ListComponent implements OnInit {
     this.repos = repos[this.currentPage]
   })
 
-
-
   constructor(
     public listService: ListService,
     public store$:Store<ListState>
@@ -41,6 +39,4 @@ export class ListComponent implements OnInit {
     }
   }
 
-  getRepos1(){
-  }
 }

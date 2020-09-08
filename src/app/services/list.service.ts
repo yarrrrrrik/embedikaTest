@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store'
 
 import { SaveLastQueryAction } from '../ngrx/list/list.actions'
@@ -17,27 +16,19 @@ export class ListService {
   ) {}
 
   getNextPageRepos(action){
-    let query = action.query.substring(0,action.query.length-12) + action.currentPage.toString() + '&per_page=3'
-    console.log(query)
+    let query = action.query.substring(0,action.query.length-12) + action.currentPage.toString() + '&per_page=5'
     return this.http.get<any>(query)
   }
 
   getRepos(action): Observable<any> {
     if(!action.query){
       if(action.currentPage){
-        return this.http.get<any>(`https://api.github.com/search/repositories?q=stars:>0&sort=stars&order=desc&page=${action.currentPage}&per_page=3`)
+        return this.http.get<any>(`https://api.github.com/search/repositories?q=stars:>0&sort=stars&order=desc&page=${action.currentPage}&per_page=5`)
       }
-      return this.http.get<any>('https://api.github.com/search/repositories?q=stars:>0&sort=stars&order=desc&page=1&per_page=3')
+      return this.http.get<any>('https://api.github.com/search/repositories?q=stars:>0&sort=stars&order=desc&page=1&per_page=5')
     }
 
     let queryURL = 'https://api.github.com/search/repositories?q='
-    // if(action.currentPage){
-      // queryURL = 'https://api.github.com/search/repositories?q=stars:>0'
-    // }else{
-
-
-
-    // }//костыль
 
     if (action.query.searchQueryString) {
       queryURL += action.query.searchQueryString + '+'
@@ -52,19 +43,10 @@ export class ListService {
       queryURL += 'mirror:true'
     }
 
-    // if(action.currentPage){
-    //   queryURL += `&sort=stars&order=desc&page=${action.currentPage}&per_page=3`
-    // }else{
-      queryURL += '&sort=stars&order=desc&page=1&per_page=3'
-    // }
-    console.log(queryURL);
+    queryURL += '&sort=stars&order=desc&page=1&per_page=5'
 
     this.store$.dispatch(new SaveLastQueryAction(queryURL))
 
     return this.http.get<any>(queryURL)
-
   }
-
-  // https://api.github.com/search/repositories?q=topic:ruby+topic:rails
-  // 'https://api.github.com/search/repositories?q=tetris+language:python+language:assembly+mirror:true&sort=stars&order=desc&page=1&per_page=3'
 }

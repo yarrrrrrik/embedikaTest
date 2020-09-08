@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { listActionsType, ListGetReposInitAction,ListPushReposAction, ListPushReposCurrentPageAction } from './ngrx/list/list.actions'
 import { itemCardActionsType, ItemCardGetRepoDetailsAction, ItemCardPushRepodDetailsAction } from './ngrx/item-card/item-card.actions'
-import {map,mergeMap,switchMap} from 'rxjs/operators'
+import { map, switchMap } from 'rxjs/operators'
 import { ListService } from './services/list.service'
 import { ItemCardService } from './services/item-card.service'
 

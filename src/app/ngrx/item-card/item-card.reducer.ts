@@ -1,4 +1,4 @@
-import {ItemCardActions,itemCardActionsType} from './item-card.actions'
+import { ItemCardActions, itemCardActionsType } from './item-card.actions'
 
 export const itemCardNode = 'itemCard'
 

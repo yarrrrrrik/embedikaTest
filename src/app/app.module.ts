@@ -18,7 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { metaReducers,reducers } from './ngrx';
 import { AppEffects } from './app.effects';
 import { ReactiveFormsModule } from '@angular/forms';
-import {Routes, RouterModule} from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 
 const appRoutes: Routes =[
     { path: '', component: ListComponent},

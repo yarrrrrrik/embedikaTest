@@ -1,10 +1,10 @@
-<div class="list">
-  <!-- <button>Repos</button> -->
-  <button (click)="getRepos1()">Repos</button>
-
-  <h2 class="list__title">SpaceX Ships</h2>
-  <app-list-item *ngFor="let repo of repos" [repo]="repo"></app-list-item>
-  <!-- <app-list-item *ngFor="let repo of repos1" [repo]="repo"></app-list-item> -->
-<app-filters></app-filters>
-<app-pagination></app-pagination>
+<div class="list-component">
+  <div class="list">
+    <h2 class="list__title">Search repos</h2>
+    <app-list-item *ngFor="let repo of repos" [repo]="repo"></app-list-item>
+    <app-pagination></app-pagination>
+  </div>
+  <div class="app-filters">
+    <app-filters></app-filters>
+  </div>
 </div>

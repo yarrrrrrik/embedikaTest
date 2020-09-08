@@ -13,10 +13,23 @@ import { selectLastQuery, selectCurrentPage, selectRepos } from '../ngrx/list/li
 export class PaginationComponent implements OnInit {
 
   public reposArrLength
-  public selectRepos$ = this.store$.pipe(select(selectRepos)).subscribe(repos => {this.reposArrLength = repos.length})
+  public currentReposArrLength
+  public selectRepos$ = this.store$.pipe(select(selectRepos)).subscribe(repos => {
+    this.reposArrLength = repos.length
+  })
 
   public currentPage
-  public selectCurrentPage$ = this.store$.pipe(select(selectCurrentPage)).subscribe(number => {this.currentPage = number + 1})
+  public selectCurrentPage$ = this.store$.pipe(select(selectCurrentPage)).subscribe(number => {
+    this.currentPage = number + 1
+    this.store$.pipe(select(selectRepos)).subscribe(repos => {
+      try {
+        this.currentReposArrLength = repos[this.currentPage - 2].length
+      } catch (error) {}
+
+    })
+  })
+
+
 
   public lastQuery
   public selectLastQuery$ = this.store$.pipe(select(selectLastQuery)).subscribe(query => {this.lastQuery = query})
@@ -26,24 +39,19 @@ export class PaginationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.store$.dispatch(new )
+    this.currentReposArrLength = 5
   }
 
-  showNextPage(){
-    // this.
-
-    console.log(this.currentPage);
-    console.log(this.reposArrLength);
-    console.log('yes');
+  showNextPage(){;
     if (this.currentPage <= this.reposArrLength){
       this.store$.dispatch(new ListShowNextPage())
     } else{
       this.store$.dispatch(new ListGetReposCurrentPageAction(this.lastQuery,this.currentPage));
     }
+
   }
 
   showPreviousPage(){
-    // console.log();
     this.store$.dispatch(new ListShowPreviousPage())
   }
 
