@@ -34,10 +34,6 @@ export class FiltersComponent implements OnInit {
 
   languagesInputValue:any = ''
 
-  show(){
-    console.log('yes');
-  }
-
   setLanguagesInputValue(){
     let countLanguages:number = 0
 
@@ -63,7 +59,7 @@ export class FiltersComponent implements OnInit {
   }
 
   getRepos(){
-    let query = this.query
+    let query = {...this.query}
     this.store$.dispatch(new ListGetReposAction(query));
   }
 

@@ -1,5 +1,5 @@
 <div class="filters-component">
-  <h3 class="filters__title">Filters</h3>
+  <h3 class="filters__title">Фильтры</h3>
   <div class="text-input" [ngClass]="{'filled-input':query.searchQueryString}">
     <label for="title" class="label" >Название</label>
     <input type="text" class="input"  name="title" id="title" [(ngModel)]="query.searchQueryString" (keydown.enter)="getRepos()">
